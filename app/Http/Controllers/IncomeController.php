@@ -2,63 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Income;
 use Illuminate\Http\Request;
 
 class IncomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $incomes = Income::orderBy('date', 'desc')->paginate(15);
+        $total = Income::sum('amount');
+
+        return view('incomes.index', compact('incomes', 'total'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('incomes.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'amount' => 'required|numeric|min:0.01',
+            'category' => 'nullable|string|max:100',
+            'date' => 'required|date',
+        ]);
+
+        Income::create($data);
+
+        return redirect()->route('incomes.index')->with('success', 'Revenu enregistré avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Income $income)
     {
-        //
+        return view('incomes.show', compact('income'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Income $income)
     {
-        //
+        return view('incomes.edit', compact('income'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Income $income)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'amount' => 'required|numeric|min:0.01',
+            'category' => 'nullable|string|max:100',
+            'date' => 'required|date',
+        ]);
+
+        $income->update($data);
+
+        return redirect()->route('incomes.index')->with('success', 'Revenu mis à jour avec succès.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Income $income)
     {
-        //
+        $income->delete();
+
+        return redirect()->route('incomes.index')->with('success', 'Revenu supprimé avec succès.');
     }
 }

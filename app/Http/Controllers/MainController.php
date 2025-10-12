@@ -10,13 +10,6 @@ class MainController extends Controller
         return view('welcome');
 }
 
-public function create() {
-   return view('expenses.create');
-}
-public function show() {
-   return view('expenses.show');
-}
-
 public function dashboard() {
    return view('dashboard');
 }

@@ -2,63 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $expenses = Expense::orderBy('date', 'desc')->paginate(15);
+        $total = Expense::sum('amount');
+
+        return view('expenses.index', compact('expenses', 'total'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('expenses.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'amount' => 'required|numeric|min:0.01',
+            'category' => 'nullable|string|max:100',
+            'date' => 'required|date',
+        ]);
+
+        Expense::create($data);
+
+        return redirect()->route('expenses.index')->with('success', 'Dépense enregistrée avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Expense $expense)
     {
-        //
+        return view('expenses.show', compact('expense'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Expense $expense)
     {
-        //
+        return view('expenses.edit', compact('expense'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Expense $expense)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'amount' => 'required|numeric|min:0.01',
+            'category' => 'nullable|string|max:100',
+            'date' => 'required|date',
+        ]);
+
+        $expense->update($data);
+
+        return redirect()->route('expenses.index')->with('success', 'Dépense mise à jour avec succès.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Expense $expense)
     {
-        //
+        $expense->delete();
+
+        return redirect()->route('expenses.index')->with('success', 'Dépense supprimée avec succès.');
     }
 }
