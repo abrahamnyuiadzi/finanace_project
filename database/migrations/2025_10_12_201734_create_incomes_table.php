@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('incomes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+    Schema::create('incomes', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('category_id')->constrained()->onDelete('cascade');
+    $table->decimal('amount', 10, 2);
+    $table->string('description')->nullable();
+    $table->date('date')->nullable();
+    $table->timestamps();
         });
     }
 
