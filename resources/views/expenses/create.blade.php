@@ -21,6 +21,7 @@
 
     <button><a href="{{ route('expenses.create') }}">saisir une depense</a></button>
     <button><a href="{{ route('expenses.show') }}">recapitulatif des depenses</a> </button>
+    <button> <a href="{{route('categories.create')}}"> saisir une categories</a></button>
 
     <form action="{{route('expenses.store')}}" method="post">
       @csrf
