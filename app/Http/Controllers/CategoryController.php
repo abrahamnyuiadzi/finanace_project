@@ -12,7 +12,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+          $categories =Category::all();
+        return view('categories.index',[
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -28,38 +31,64 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          $request->validate([
+            'name' => 'required|unique:categories|max:225',
+        ]);
+
+        Category::create([
+            'name' =>$request->name,
+            
+        ]);
+        return redirect()->route('categories.index')->with('success',"Categorie ajoutée avec succes ");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(string $id)
     {
-        //
+          $category =Category::find($id);
+        return view('categories.show',[
+            'category' => $category,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(string $id)
     {
-        //
+        $category =Category::find($id);
+        return view('categories.edit',[
+            'category' => $category,
+        ]);
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, string $id)
     {
-        //
+            $request->validate([
+            'name' => 'required|max:225',
+        ]);
+
+       Category::find($id)->update([
+        'name'=>$request->name,
+        'description'=>$request->description,
+
+
+       ]);
+       return back()->with('success',"categorie ajoutée avec succés");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(string $id)
     {
-        //
+         Category::find($id)->delete();
+      return redirect()->route('categories.index')->with('success',"categorie supprimée  avec success");
     }
 }
