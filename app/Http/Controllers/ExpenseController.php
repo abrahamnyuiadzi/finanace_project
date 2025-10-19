@@ -19,8 +19,12 @@ class ExpenseController extends Controller
 
     public function create()
     {
-         $categories = Category::all();
-        return view('expenses.create');
+        //  $categories = Category::all();
+        // return view('expenses.create');
+             return view('expenses.create', [
+        'categories'=>Category::all()
+      
+        ]);
     }
 
     public function store(Request $request)
