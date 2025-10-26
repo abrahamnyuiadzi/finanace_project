@@ -22,7 +22,7 @@ class ExpenseController extends Controller
         //  $categories = Category::all();
         // return view('expenses.create');
              return view('expenses.create', [
-        'categories'=>Category::all()
+             'categories'=>Category::all()
       
         ]);
     }

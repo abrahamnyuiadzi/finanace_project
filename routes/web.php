@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MainController;
@@ -26,6 +27,11 @@ Route::put('/categories/{id}/update',[CategoryController::class ,'edit'])->name(
 Route::delete('/categories/{id}/destroy',[CategoryController::class ,'destroy'])->name('categories.destroy');
 
 
+// <--------------------------------------authrntification------------------------------------------>
+
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/registration', [AuthController::class, 'registration'])->name('registration');
 
 
 

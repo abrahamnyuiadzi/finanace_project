@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,6 +17,7 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next): Response
     {
       
-        return $next($request);
+        return $next($request);  
+       
     }
 }

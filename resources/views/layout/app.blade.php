@@ -21,6 +21,9 @@
                 <a href="{{route('expenses.create')}}">expenses</a>
             </li>
             <li>
+                <a href="{{route('categories.create')}}">categories</a>
+            </li>
+            <li>
                 <a href="">incomes</a>
             </li>
 

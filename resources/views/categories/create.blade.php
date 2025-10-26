@@ -23,6 +23,7 @@
 
       <label for="category">category :</label><br>
       <input type="text" name="category"><br>
+      
             <button type="submit">
           Enregistrer
       </button>
