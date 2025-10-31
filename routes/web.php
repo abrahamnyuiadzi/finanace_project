@@ -10,11 +10,14 @@ Route::get('/',[MainController::class ,'welcome'])->name('welcome');
 
 Route::get('/dashboard',[MainController::class ,'dashboard'])->name('dashboard');
 
+// <--------------------------------------Expenses------------------------------------------>
 Route::get('/expenses',[ExpenseController::class ,'index'])->name('expenses.index');
 Route::get('/expenses/create',[ExpenseController::class ,'create'])->name('expenses.create');
 Route::post('/expenses/store',[ExpenseController::class ,'store'])->name('expenses.store');
-Route::get('/expenses/show',[ExpenseController::class ,'show'])->name('expenses.show');
-Route::put('/expenses/{id}/update',[ExpenseController::class ,'edit'])->name('expenses.edit');
+Route::get('/expenses/{id}/show',[ExpenseController::class ,'show'])->name('expenses.show');
+Route::get('/expenses/{id}/update',[ExpenseController::class ,'edit'])->name('expenses.edit');
+
+Route::put('/expenses/{id}/update', [ExpenseController::class , 'update'])->name('expenses.update');
 Route::delete('/expenses/{id}/destroy',[ExpenseController::class ,'destroy'])->name('expenses.destroy');
 
 
@@ -27,10 +30,10 @@ Route::put('/categories/{id}/update',[CategoryController::class ,'edit'])->name(
 Route::delete('/categories/{id}/destroy',[CategoryController::class ,'destroy'])->name('categories.destroy');
 
 
-// <--------------------------------------authrntification------------------------------------------>
+// <--------------------------------------authentification------------------------------------------>
 
 
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/registration', [AuthController::class, 'registration'])->name('registration');
 
 

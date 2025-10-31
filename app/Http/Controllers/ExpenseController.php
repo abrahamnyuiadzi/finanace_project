@@ -11,7 +11,7 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses = Expense::orderBy('date', 'desc')->paginate(15);
-       
+
         $total = Expense::sum('amount');
 
         return view('expenses.index', compact('expenses', 'total'));
@@ -21,65 +21,89 @@ class ExpenseController extends Controller
     {
         //  $categories = Category::all();
         // return view('expenses.create');
-             return view('expenses.create', [
-             'categories'=>Category::all()
-      
+        return view('expenses.create', [
+            'categories' => Category::all()
+
         ]);
     }
 
     public function store(Request $request)
     {
-         $request->validate([
-            'title' => 'required|string|max:255',
+        $request->validate([
+
             'description' => 'nullable|string',
+            'recipient' => 'required|string',
             'amount' => 'required|numeric|min:0.01',
             'category_id' => 'nullable|string|max:100',
             'date' => 'required|date',
         ]);
 
-     
+
 
 
         Expense::create([
-                'title' =>$request->title,
-                'description' =>$request->description,
-                'amount' =>$request->amount,
-                'category_id' =>$request->category_id,
-                'date' =>$request->date,
-
+            'category_id' => $request->category_id,
+            'description' => $request->description,
+            'amount' => $request->amount,
+            'date' => $request->date,
+            'recipient' => $request->recipient,
         ]);
 
         return redirect()->route('expenses.index')->with('success', 'Dépense enregistrée avec succès.');
     }
 
-    public function show(Expense $expense)
+    public function show(string $id)
     {
-        return view('expenses.show', compact('expense'));
+        // return view('expenses.show', compact('expense'));
+
+         $expense =Expense::find($id);
+        return view('expenses.show',[
+            'expense' => $expense,
+        ]);
     }
 
-    public function edit(Expense $expense)
+    public function edit(string $id)
     {
-        return view('expenses.edit', compact('expense'));
-    }
-
-    public function update(Request $request, Expense $expense)
-    {
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'amount' => 'required|numeric|min:0.01',
-            'category' => 'nullable|string|max:100',
-            'date' => 'required|date',
+    //   return view('expenses.edit', compact('expense')); 
+       $expense =Expense::find($id);
+        return view('expenses.edit',[
+            'expense' => $expense,
+            'categories' => Category::all()
         ]);
 
-        $expense->update($data);
+
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $data = $request->validate([
+
+            'description' => 'nullable|string',
+            'amount' => 'required|numeric|min:0.01',
+            'category_id' => 'nullable|string|max:100',
+            'date' => 'required|date',
+            'recipient' => 'required|string',
+        ]);
+
+        // $expense->update($data);
+
+          Expense::find($id)->update([
+        'amount'=>$request->amount,
+        'date'=>$request->date,
+        'recipient'=>$request->recipient,
+        'category_id'=>$request->category_id,
+        'description'=>$request->description,
+
+
+       ]);
 
         return redirect()->route('expenses.index')->with('success', 'Dépense mise à jour avec succès.');
     }
 
-    public function destroy(Expense $expense)
+    public function destroy(string $id)
     {
-        $expense->delete();
+        // $expense->delete();
+             Expense::find($id)->delete();
 
         return redirect()->route('expenses.index')->with('success', 'Dépense supprimée avec succès.');
     }

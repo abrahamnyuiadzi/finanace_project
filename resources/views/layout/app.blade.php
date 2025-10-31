@@ -29,7 +29,7 @@
 
           <div class="connect">
             <ul>
-                <li><a href="">connexion</a></li>
+                <li><a href="{{route('auth.login')}}">connexion</a></li>
             </ul>
           </div>
         </ul>

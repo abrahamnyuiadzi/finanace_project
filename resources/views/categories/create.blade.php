@@ -22,7 +22,7 @@
       @csrf
 
       <label for="category">category :</label><br>
-      <input type="text" name="category"><br>
+      <input type="text" name="name"><br>
       
             <button type="submit">
           Enregistrer
