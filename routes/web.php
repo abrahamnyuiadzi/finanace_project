@@ -3,11 +3,11 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[MainController::class ,'welcome'])->name('welcome');
-
 Route::get('/dashboard',[MainController::class ,'dashboard'])->name('dashboard');
 
 // <--------------------------------------Expenses------------------------------------------>
@@ -29,6 +29,15 @@ Route::get('/categories/show',[CategoryController::class ,'show'])->name('catego
 Route::put('/categories/{id}/update',[CategoryController::class ,'edit'])->name('categories.edit');
 Route::delete('/categories/{id}/destroy',[CategoryController::class ,'destroy'])->name('categories.destroy');
 
+// <--------------------------------------Incomes------------------------------------------>
+Route::get('/incomes',[IncomeController::class ,'index'])->name('incomes.index');
+Route::get('/incomes/create',[IncomeController::class ,'create'])->name('incomes.create');
+Route::post('/incomes/store',[IncomeController::class ,'store'])->name('incomes.store');
+Route::get('/incomes/{id}/show',[IncomeController::class ,'show'])->name('incomes.show');
+Route::get('/incomes/{id}/update',[IncomeController::class ,'edit'])->name('incomes.edit');
+
+Route::put('/incomes/{id}/update', [IncomeController::class , 'update'])->name('incomes.update');
+Route::delete('/incomes/{id}/destroy',[IncomeController::class ,'destroy'])->name('incomes.destroy');
 
 // <--------------------------------------authentification------------------------------------------>
 

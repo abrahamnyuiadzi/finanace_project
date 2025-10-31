@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Income;
 use Illuminate\Http\Request;
 
@@ -22,47 +23,70 @@ class IncomeController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
+        $request->validate([
+     
             'description' => 'nullable|string',
             'amount' => 'required|numeric|min:0.01',
-            'category' => 'nullable|string|max:100',
+            'category_id' => 'nullable|string|max:100',
             'date' => 'required|date',
         ]);
-
-        Income::create($data);
+        Income::create([
+            'category_id' => $request->category_id,
+            'description' => $request->description,
+            'amount' => $request->amount,
+            'date' => $request->date,
+       
+        ]);
+        
 
         return redirect()->route('incomes.index')->with('success', 'Revenu enregistré avec succès.');
     }
 
-    public function show(Income $income)
+    public function show(string $id)
     {
-        return view('incomes.show', compact('income'));
+        // return view('incomes.show', compact('income'));
+          $income =Income::find($id);
+        return view('incomes.show',[
+            'income' => $income,
+        ]);
     }
 
-    public function edit(Income $income)
+    public function edit(string $id)
     {
-        return view('incomes.edit', compact('income'));
+        // return view('incomes.edit', compact('income'));
+           $income =Income::find($id);
+            return view('expenses.edit',[
+            'expense' => $income,
+            'categories' => Category::all()
+        ]);
     }
 
-    public function update(Request $request, Income $income)
+    public function update(Request $request, string $id)
     {
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
+        $request->validate([
+        
             'description' => 'nullable|string',
             'amount' => 'required|numeric|min:0.01',
-            'category' => 'nullable|string|max:100',
+            'category_id' => 'nullable|string|max:100',
             'date' => 'required|date',
         ]);
 
-        $income->update($data);
+           Income::find($id)->update([
+            'category_id' => $request->category_id,
+            'description' => $request->description,
+            'amount' => $request->amount,
+            'date' => $request->date,
+       
+        ]);
+
 
         return redirect()->route('incomes.index')->with('success', 'Revenu mis à jour avec succès.');
     }
 
-    public function destroy(Income $income)
+    public function destroy(string $id)
     {
-        $income->delete();
+        // $income->delete();
+               Income::find($id)->delete();
 
         return redirect()->route('incomes.index')->with('success', 'Revenu supprimé avec succès.');
     }

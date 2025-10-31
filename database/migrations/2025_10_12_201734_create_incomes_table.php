@@ -15,10 +15,10 @@ return new class extends Migration
     $table->id();
     $table->foreignId('category_id')->constrained()->onDelete('cascade');
     $table->decimal('amount', 10, 2);
-    $table->string('description')->nullable();
-    $table->date('date')->nullable();
+    $table->string('description');
+    $table->date('date');
     $table->timestamps();
-        });
+    });
     }
 
     /**

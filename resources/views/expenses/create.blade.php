@@ -20,27 +20,27 @@
 <ul><li><a href="{{route('expenses.show')}}">recapitulatif des depenses</a></li></ul> --}}
 
     <button><a href="{{ route('expenses.create') }}">saisir une depense</a></button>
-    <button><a href="{{ route('expenses.show') }}">recapitulatif des depenses</a> </button>
+    {{-- <button><a href="{{ route('expenses.show') }}">recapitulatif des depenses</a> </button> --}}
     <button> <a href="{{ route('categories.create') }}"> saisir une categories</a></button>
 
     <form action="{{ route('expenses.store') }}" method="post">
         @csrf
 
-        <label for="date">Date :</label><br>
+        <label for="date">Date : </label><br>
         <input type="date" name="date"><br>
 
         <label for="amount">amount:</label><br>
-        <input type="decimal" name ="amount"><br>
+        <input type="decimal" name ="amount" ><br>
 
         <label for="recipient">recipient:</label><br>
-        <input type="text" name ="recipient"><br>
+        <input type="text" name ="recipient"  ><br>
 
         <label for="description">decription</label><br>
-        <input type="text" name="description"><br><br>
+        <input type="text" name="description"  ><br><br>
 
         <div class="mb-3">
             <label for="category_id" class="form-label">Catégorie</label>
-            <select class="form-select" id="category_id" name="category_id" required>
+            <select class="form-select" id="category_id" name="category_id"   required>
 
                 {{-- <option value="">Sélectionner une catégorie</option> --}}
                 @foreach ($categories as $category)
