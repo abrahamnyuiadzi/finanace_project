@@ -18,7 +18,11 @@ class IncomeController extends Controller
 
     public function create()
     {
-        return view('incomes.create');
+        // return view('incomes.create');
+          return view('incomes.create', [
+            'categories' => Category::all()
+
+        ]);
     }
 
     public function store(Request $request)
@@ -55,8 +59,8 @@ class IncomeController extends Controller
     {
         // return view('incomes.edit', compact('income'));
            $income =Income::find($id);
-            return view('expenses.edit',[
-            'expense' => $income,
+            return view('incomes.edit',[
+            'income' => $income,
             'categories' => Category::all()
         ]);
     }

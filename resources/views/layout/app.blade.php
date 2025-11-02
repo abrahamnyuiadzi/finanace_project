@@ -24,7 +24,7 @@
                 <a href="{{route('categories.create')}}">categories</a>
             </li>
             <li>
-                <a href="">incomes</a>
+                <a href="{{route('incomes.create')}}">incomes</a>
             </li>
 
           <div class="connect">
