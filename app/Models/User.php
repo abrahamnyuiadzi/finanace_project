@@ -11,6 +11,7 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+       
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     
     ];
 
@@ -33,6 +35,21 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+      public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isAccountant(): bool
+    {
+        return $this->role === 'accountant';
+    }
+
+    public function isEmployee(): bool
+    {
+        return $this->role === 'employee';
+    }
 
     /**
      * Get the attributes that should be cast.

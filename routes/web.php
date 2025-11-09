@@ -42,10 +42,28 @@ Route::delete('/incomes/{id}/destroy',[IncomeController::class ,'destroy'])->nam
 // <--------------------------------------authentification------------------------------------------>
 
 
-Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-Route::post('/registration', [AuthController::class, 'registration'])->name('registration');
+// Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+// Route::post('/registration', [AuthController::class, 'registration'])->name('auth.registration');
 
 
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
+});
+
+Route::middleware(['auth', 'role:accountant'])->group(function () {
+    Route::get('/accountant/dashboard', fn() => view('accountant.dashboard'))->name('accountant.dashboard');
+});
+
+Route::middleware(['auth', 'role:employee'])->group(function () {
+    Route::get('/employee/profile', fn() => view('employee.profile'))->name('employee.profile');
+});
 
 
 

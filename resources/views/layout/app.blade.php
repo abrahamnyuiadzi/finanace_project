@@ -11,12 +11,8 @@
     <nav>
         <ul>
           
-            <li>
-                <a href="{{route('dashboard')}}">Dashboard</a>
-            </li>
-            <li>
-                <a href="">budget</a>
-            </li>
+          
+           
             <li>
                 <a href="{{route('expenses.create')}}">expenses</a>
             </li>
