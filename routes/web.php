@@ -48,7 +48,9 @@ Route::delete('/incomes/{id}/destroy',[IncomeController::class ,'destroy'])->nam
 
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/registration', [AuthController::class, 'showRegisterForm'])->name('auth.registration');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 

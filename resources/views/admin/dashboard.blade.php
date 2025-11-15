@@ -2,6 +2,6 @@
 
 
 @section('content')
-<h1>profile</h1>
+<h1>profile de l'admin</h1>
     
 @endsection

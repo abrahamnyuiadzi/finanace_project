@@ -60,5 +60,11 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Utilisateur créé avec succès');
     }
+
+
+     public function showRegisterForm()
+    {
+        return view('auth.registration');
+    }
 }
 
