@@ -6,19 +6,20 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string $role): Response
+    public function handle(Request $request, Closure $next): Response
     {
+        // return $next($request);
+        //     if (auth()->user()?->role !== 'admin') {
+        //     abort(403, 'Accès refusé. Réservé à l’admin.');
+        // }
 
-         if (! $request->user() || $request->user()->role !== $role) {
-            abort(403, 'Accès interdit');
-        }
         return $next($request);
     }
 }

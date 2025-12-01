@@ -14,6 +14,13 @@
           
            
             <li>
+                <a href="{{route('expenses.create')}}">Dashboard</a>
+            </li>
+            <li>
+                <a href="{{route('expenses.create')}}">Budgets</a>
+            </li>
+           
+            <li>
                 <a href="{{route('expenses.create')}}">expenses</a>
             </li>
             <li>
