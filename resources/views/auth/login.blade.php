@@ -30,6 +30,6 @@
         <button type="submit">
             Se connecter
         </button>
-        <a href="{{route('auth.registration')}}"> s'enregitrer</a>
+        <a href="{{route('admin.users.create')}}"> s'enregitrer</a>
     </form>
 @endsection

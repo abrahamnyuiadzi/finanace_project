@@ -15,10 +15,12 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-
+       
          if (! $request->user() || $request->user()->role !== $role) {
             abort(403, 'Accès interdit');
         }
-        return $next($request);
+
+          return $next($request);
+       
     }
 }
