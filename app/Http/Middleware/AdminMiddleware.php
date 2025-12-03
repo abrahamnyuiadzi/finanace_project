@@ -15,10 +15,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // return $next($request);
-        //     if (auth()->user()?->role !== 'admin') {
-        //     abort(403, 'Accès refusé. Réservé à l’admin.');
-        // }
+     
 
         return $next($request);
     }

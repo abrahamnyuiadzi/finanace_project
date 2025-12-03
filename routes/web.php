@@ -9,7 +9,7 @@ use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[MainController::class ,'welcome'])->name('welcome');
-Route::get('/dashboard',[MainController::class ,'dashboard'])->name('dashboard');
+ Route::get('/dashboard',[MainController::class ,'dashboard'])->name('dashboard');
 
 
 
@@ -26,7 +26,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
-// Zone accessible uniquement par l’admin
+
 Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
 
     Route::get('/admin/dashboard', function () { return view('admin.dashboard'); })->name('admin.dashboard');
@@ -35,15 +35,17 @@ Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
     Route::resource('expenses', ExpenseController::class);
     Route::resource('categories', CategoryController::class);
 
+ Route::post('/admin/users/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])
+        ->name('admin.users.store');
 
+        Route::get('/admin/users/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])
+        ->name('admin.users.create');
 
      
 });
-Route::get('/admin/users/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])
-        ->name('admin.users.create');
 
-    Route::post('/admin/users/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])
-        ->name('admin.users.store');
+
+
 
 
 
