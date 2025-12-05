@@ -17,7 +17,7 @@
                 <a href="{{route('expenses.create')}}">Dashboard</a>
             </li>
             <li>
-                <a href="{{route('expenses.create')}}">Budgets</a>
+                <a href="{{route('budget.index')}}">Budgets</a>
             </li>
            
             <li>
@@ -36,6 +36,14 @@
             </ul>
           </div>
         </ul>
+
+        @if(auth()->check())
+            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                @csrf
+                <button type="submit">Déconnexion</button>
+            </form>
+        @endif
+
 
         @yield('content')
     </nav>

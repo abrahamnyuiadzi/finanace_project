@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
@@ -30,6 +31,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
 
     Route::get('/admin/dashboard', function () { return view('admin.dashboard'); })->name('admin.dashboard');
+    Route::get('/budget', [BudgetController::class, 'index'])->name('budget.index');
+
 
     Route::resource('incomes', IncomeController::class);
     Route::resource('expenses', ExpenseController::class);
