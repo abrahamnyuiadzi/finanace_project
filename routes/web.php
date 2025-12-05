@@ -31,17 +31,40 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
 
     Route::get('/admin/dashboard', function () { return view('admin.dashboard'); })->name('admin.dashboard');
+   
     Route::get('/budget', [BudgetController::class, 'index'])->name('budget.index');
+    Route::get('/budget/export/csv', [BudgetController::class, 'exportCsv'])->name('budget.export.csv');
+    Route::get('/budget/export/pdf', [BudgetController::class, 'exportPdf'])->name('budget.export.pdf');
+
+    // Route::get('/budget/filter', [BudgetController::class, 'filter'])->name('budget.filter');
+
+    // Route::get('/budget/export/pdf', [BudgetController::class, 'exportPdf'])->name('budget.pdf');
+    // Route::get('/budget/export/excel', [BudgetController::class, 'exportExcel'])->name('budget.excel');
+
+    // Route::get('/budget/export', [BudgetController::class, 'export'])
+    // ->middleware(['auth', 'role:admin'])
+    // ->name('budget.export');
+
+
+    //     Route::get('/budget/export/csv', [BudgetController::class, 'exportCsv'])
+    //     ->name('budget.export.csv');
+
+    // Route::get('/budget/export/xlsx', [BudgetController::class, 'exportXlsx'])
+    //     ->name('budget.export.xlsx');
+
+    // Route::get('/budget/export/pdf', [BudgetController::class, 'exportPdf'])
+    //     ->name('budget.export.pdf');
+    
+
 
 
     Route::resource('incomes', IncomeController::class);
     Route::resource('expenses', ExpenseController::class);
     Route::resource('categories', CategoryController::class);
 
- Route::post('/admin/users/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])
+     Route::post('/admin/users/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])
         ->name('admin.users.store');
-
-        Route::get('/admin/users/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])
+     Route::get('/admin/users/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])
         ->name('admin.users.create');
 
      
