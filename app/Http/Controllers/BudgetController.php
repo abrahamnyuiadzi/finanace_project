@@ -43,15 +43,15 @@ class BudgetController extends Controller
         ));
     }
 
-    public function exportCsv()
-    {
-        return Excel::download(new BudgetExport, 'budget.csv');
-    }
+    // public function exportCsv()
+    // {
+    //     return Excel::download(new BudgetExport, 'budget.csv');
+    // }
 
-    public function exportPdf()
-    {
-        $categories = Category::with(['incomes', 'expenses'])->get();
-        $pdf = Pdf::loadView('budget.pdf', compact('categories'));
-        return $pdf->download('budget.pdf');
-    }
+    // public function exportPdf()
+    // {
+    //     $categories = Category::with(['incomes', 'expenses'])->get();
+    //     $pdf = Pdf::loadView('budget.pdf', compact('categories'));
+    //     return $pdf->download('budget.pdf');
+    // }
 }

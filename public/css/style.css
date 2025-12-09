@@ -1,0 +1,274 @@
+body {
+    margin: 0;
+    background: #f0f2f5;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: #1a1d25;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    color: white;
+}
+
+.sidebar .brand {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.sidebar .menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .menu li {
+    margin: 15px 0;
+}
+
+.sidebar .menu li a {
+    text-decoration: none;
+    color: #d3d3d3;
+    padding: 12px;
+    display: block;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.sidebar .menu li a:hover {
+    background: #2a2e3a;
+    color: white;
+}
+
+/* MAIN WRAPPER */
+.main-wrapper {
+    margin-left: 260px;
+}
+
+/* NAVBAR */
+.navbar {
+    height: 60px;
+    background: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-right span {
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.btn-login,
+.btn-logout {
+    background: #4a69bd;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+/* CONTENT */
+.content {
+    padding: 25px;
+}
+
+/* DASHBOARD CARDS */
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    width: 260px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+}
+
+/* LOGIN FORM STYLES */
+.login-container {
+    max-width: 400px;
+    margin: 80px auto;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", sans-serif;
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1a1d25;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.login-container form label {
+    display: block;
+    margin-bottom: 6px;
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.login-container form input {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    border: 1px solid #d3d3d3;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.login-container form input:focus {
+    border-color: #4a69bd;
+    box-shadow: 0 0 6px rgba(74, 105, 189, 0.3);
+}
+
+.login-container form button {
+    width: 100%;
+    background: #4a69bd;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-container form button:hover {
+    background: #3b4f9a;
+}
+
+.login-container form a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #4a69bd;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.login-container form a:hover {
+    text-decoration: underline;
+}
+
+/* ALERT MESSAGES */
+.alert {
+    padding: 12px;
+    background: #f8d7da;
+    color: #842029;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+/* EXPENSES TABLE - STYLE ISOLÉ */
+.expenses-container {
+    margin: 30px auto;
+    max-width: 900px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.expenses-container h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1a1d25;
+}
+
+.expenses-container .expenses-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.expenses-container .expenses-table th,
+.expenses-container .expenses-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+}
+
+.expenses-container .expenses-table th {
+    background-color: #4a69bd;
+    color: white;
+    font-weight: 600;
+}
+
+.expenses-container .expenses-table tr:hover {
+    background-color: #f0f2f5;
+}
+
+.expenses-container .actions {
+    display: flex;
+    gap: 8px;
+}
+
+.expenses-container .btn {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+    border: none;
+}
+
+.expenses-container .btn-view {
+    background-color: #4a69bd;
+}
+
+.expenses-container .btn-view:hover {
+    background-color: #3b4f9a;
+}
+
+.expenses-container .btn-edit {
+    background-color: #f39c12;
+}
+
+.expenses-container .btn-edit:hover {
+    background-color: #d68910;
+}
+
+.expenses-container .btn-delete {
+    background-color: #e74c3c;
+}
+
+.expenses-container .btn-delete:hover {
+    background-color: #c0392b;
+}
+
+.expenses-container .alert {
+    padding: 12px;
+    background: #d1e7dd;
+    color: #0f5132;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+

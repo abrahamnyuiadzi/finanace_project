@@ -10,8 +10,24 @@ class MainController extends Controller
         return view('welcome');
 }
 
-public function dashboard() {
-   return view('dashboard');
+// public function dashboard() {
+//    return view('dashboard');
+// }
+
+public function dashboard()
+{
+    $user = auth()->user();
+
+    switch ($user->role) {
+        case 'admin':
+            return redirect()->route('admin.dashboard');
+        case 'accountant':
+            return redirect()->route('accountant.dashboard');
+        case 'employee':
+            return redirect()->route('employee.dashboard');
+    }
+
+    abort(403, 'Role non reconnu');
 }
 
 }

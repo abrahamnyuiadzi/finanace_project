@@ -1,13 +1,17 @@
 @extends('layout.app')
 
 @section('content')
+<div class="login-container">
     <h1>Connexion</h1>
+
+    {{-- Message de succès --}}
     @if ($message = Session::get('success'))
-        <h3>{{ $message }}</h3>
+        <div class="alert alert-success">{{ $message }}</div>
     @endif
 
+    {{-- Erreurs de validation --}}
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <div class="alert">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -19,17 +23,15 @@
     <form action="{{ route('login') }}" method="post">
         @csrf
 
-        <label for="email">E-mail</label><br>
-        <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Saisir l'e-mail ici ...">
-        <br /><br />
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="Saisir l'e-mail ici ..." required>
 
-        <label for="password">Mot de passe</label><br>
-        <input type="password" name="password" id="password" placeholder="Saisir le mot de passe ici ...">
-        <br /><br />
+        <label for="password">Mot de passe</label>
+        <input type="password" name="password" id="password" placeholder="Saisir le mot de passe ici ..." required>
 
-        <button type="submit">
-            Se connecter
-        </button>
-        <a href="{{route('admin.users.create')}}"> s'enregitrer</a>
+        <button type="submit">Se connecter</button>
+
+        <a href="{{ route('admin.users.create') }}">S'inscrire</a>
     </form>
+</div>
 @endsection

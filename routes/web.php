@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController as AdminAdminDashboardController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminDashboardController as ControllersAdminDashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CategoryController;
@@ -30,8 +33,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
 
-    Route::get('/admin/dashboard', function () { return view('admin.dashboard'); })->name('admin.dashboard');
-   
+    // Route::get('/admin/dashboard', function () { return view('admin.dashboard'); })->name('admin.dashboard');
+   Route::get('/admin/dashboard', [AdminAdminDashboardController::class, 'index'])
+    ->name('admin.dashboard');
     Route::get('/budget', [BudgetController::class, 'index'])->name('budget.index');
     Route::get('/budget/export/csv', [BudgetController::class, 'exportCsv'])->name('budget.export.csv');
     Route::get('/budget/export/pdf', [BudgetController::class, 'exportPdf'])->name('budget.export.pdf');
@@ -83,7 +87,7 @@ Route::middleware(['auth', 'role:accountant'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:employee'])->group(function () {
-    Route::get('/employee/profile', fn() => view('employee.profile'))->name('employee.profile');
+    Route::get('/employee/profile', fn() => view('employee.dashboard'))->name('employee.dashboard');
 });
 
 
