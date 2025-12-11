@@ -1,57 +1,56 @@
 @extends('layout.app')
 
 @section('content')
-    <h1>Modifier un revenu </h1>
 
-    @if($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
-        @endforeach
-    </ul>
+<h1 class="page-title">Modifier un revenu</h1>
+<hr>
 
-</div>
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
 @endif
 
-
-@if ($message =Session::get('success'))
-<p>
-    {{$message}}
-</p>
+@if ($message = Session::get('success'))
+    <p class="success-message">{{ $message }}</p>
 @endif
 
+<form action="{{ route('incomes.update', $income->id) }}" method="post" class="form-card">
+    @csrf
+    @method('PUT')
 
-    <form action="{{ route('incomes.update', $income->id) }}" method="post">
-        @csrf
-           
-        @method('PUT')
-        <label for="date">Date :</label><br>
-        <input type="date" name="date"  value="{{ old('date', $income->date) }}"><br>
+    <div class="form-group">
+        <label for="date">Date :</label>
+        <input type="date" name="date" id="date" value="{{ old('date', $income->date) }}">
+    </div>
 
-        <label for="amount">amount:</label><br>
-        <input type="decimal" name ="amount"  value="{{ old('amount', $income->amount) }}"><br>
+    <div class="form-group">
+        <label for="amount">Montant :</label>
+        <input type="number" name="amount" id="amount" step="0.01" value="{{ old('amount', $income->amount) }}">
+    </div>
 
-       
-        <label for="description">decription</label><br>
-        <input type="text" name="description" value="{{ old('description', $income->description) }}"><br><br>
+    <div class="form-group">
+        <label for="description">Description :</label>
+        <input type="text" name="description" id="description" value="{{ old('description', $income->description) }}">
+    </div>
 
-        <div class="mb-3">
-            <label for="category_id" class="form-label">Catégorie</label>
-            <select class="form-select" id="category_id" name="category_id" value="{{ old('category_id', $income->category_id) }}" required>
+    <div class="form-group">
+        <label for="category_id">Catégorie :</label>
+        <select name="category_id" id="category_id" required>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" {{ old('category_id', $income->category_id) == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
-                {{-- <option value="">Sélectionner une catégorie</option> --}}
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
-
-
-        <button type="submit">
-            Modifier le revenu
-        </button>
-    </form>
-
+    <button type="submit" class="btn-primary">Modifier le revenu</button>
+    <a href="{{ route('incomes.index') }}" class="btn-secondary">Retour</a>
+</form>
 
 @endsection

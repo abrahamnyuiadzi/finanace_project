@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 
 @section('content')
 
@@ -24,6 +24,8 @@
     </div>
 
 </div>
+ <div class="card"> <a href="{{ route('admin.users.create') }}">Enregistrer un Employé</a></div>
+    
 
 <br><br>
 

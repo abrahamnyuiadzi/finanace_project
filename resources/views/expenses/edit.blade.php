@@ -1,59 +1,58 @@
 @extends('layout.app')
 
 @section('content')
-    <h1>Modifier une depenses </h1>
 
-    @if($errors->any())
-<div class="alert alert-danger">
+<h1 class="page-title">Modifier une dépense</h1>
+
+@if ($errors->any())
+<div class="alert alert-danger form-alert">
     <ul>
         @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
+            <li>{{ $error }}</li>
         @endforeach
     </ul>
-
 </div>
 @endif
 
-
-@if ($message =Session::get('success'))
-<p>
-    {{$message}}
+@if ($message = Session::get('success'))
+<p class="success-message">
+    {{ $message }}
 </p>
 @endif
 
+<div class="expense-form-card">
 
     <form action="{{ route('expenses.update', $expense->id) }}" method="post">
         @csrf
-           
         @method('PUT')
-        <label for="date">Date :</label><br>
-        <input type="date" name="date"  value="{{ old('date', $expense->date) }}"><br>
 
-        <label for="amount">amount:</label><br>
-        <input type="decimal" name ="amount"  value="{{ old('amount', $expense->amount) }}"><br>
+        <label for="date">Date</label>
+        <input type="date" name="date" value="{{ old('date', $expense->date) }}">
 
-        <label for="recipient">recipient:</label><br>
-        <input type="text" name ="recipient"  value="{{ old('description', $expense->description) }}"><br>
+        <label for="amount">Montant</label>
+        <input type="number" step="0.01" name="amount" value="{{ old('amount', $expense->amount) }}">
 
-        <label for="description">decription</label><br>
-        <input type="text" name="description" value="{{ old('recipient', $expense->recipient) }}"><br><br>
+        <label for="recipient">Destinataire</label>
+        <input type="text" name="recipient" value="{{ old('recipient', $expense->recipient) }}">
 
-        <div class="mb-3">
-            <label for="category_id" class="form-label">Catégorie</label>
-            <select class="form-select" id="category_id" name="category_id" value="{{ old('category_id', $expense->category_id) }}" required>
+        <label for="description">Description</label>
+        <input type="text" name="description" value="{{ old('description', $expense->description) }}">
 
-                {{-- <option value="">Sélectionner une catégorie</option> --}}
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
+        <label for="category_id">Catégorie</label>
+        <select id="category_id" name="category_id" required>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" 
+                    {{ old('category_id', $expense->category_id) == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
 
-
-        <button type="submit">
-            Modifier la depense
+        <button type="submit" class="btn-submit">
+            Modifier la dépense
         </button>
     </form>
 
+</div>
 
 @endsection

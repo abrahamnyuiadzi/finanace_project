@@ -2,53 +2,50 @@
 
 @section('content')
 
-<h1>LES DEPENSES</h1><hr>
-
+<h1 class="page-title">Ajouter un revenu</h1>
+<hr>
 
 @if($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
-        @endforeach
-    </ul>
-
-</div>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
 @endif
 
-{{-- <ul><li><a href="{{route('expenses.create')}}"> saisir une depense</a></li></ul>
-<ul><li><a href="{{route('expenses.show')}}">recapitulatif des depenses</a></li></ul> --}}
+<form action="{{ route('incomes.store') }}" method="post" class="form-card">
+    @csrf
 
-<button><a href="{{route('incomes.create')}}">saisir une Revenue</a></button>
-{{-- <button><a href="{{route('incomes.show')}}">recapitulatif des revenues</a> </button> --}}
+    <div class="form-group">
+        <label for="date">Date :</label>
+        <input type="date" name="date" id="date" value="{{ old('date') }}">
+    </div>
 
-<form action="{{ route('incomes.store') }}" method="post">
-  @csrf
-    <label for="date">Date :</label><br>
-    <input type="date" name="date"><br>
+    <div class="form-group">
+        <label for="amount">Montant :</label>
+        <input type="number" name="amount" id="amount" step="0.01" value="{{ old('amount') }}">
+    </div>
 
-    <label for="amount">amount:</label><br>
-    <input type="decimal" name ="amount"><br>
+    <div class="form-group">
+        <label for="description">Description :</label>
+        <input type="text" name="description" id="description" value="{{ old('description') }}">
+    </div>
 
+    <div class="form-group">
+        <label for="category_id">Catégorie :</label>
+        <select name="category_id" id="category_id" required>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
-    <label for="description">decription</label><br>
-    <input type="text" name="description"><br><br>
-
-     <div class="mb-3">
-            <label for="category_id" class="form-label">Catégorie</label>
-            <select class="form-select" id="category_id" name="category_id"   required>
-
-                {{-- <option value="">Sélectionner une catégorie</option> --}}
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
-
-
-    <button type="submit">
-      Enregistrer
-   </button>
+    <button type="submit" class="btn-primary">Enregistrer</button>
+    <a href="{{ route('incomes.index') }}" class="btn-secondary">Retour</a>
 </form>
-    
+
 @endsection

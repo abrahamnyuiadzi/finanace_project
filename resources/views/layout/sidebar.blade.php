@@ -8,7 +8,7 @@
 
         <li><a href="{{ route('incomes.index') }}">Incomes</a></li>
         <li><a href="{{ route('expenses.index') }}">Expenses</a></li>
-        <li><a href="{{ route('categories.index') }}">Categories</a></li>
+        <li><a href="{{ route('categories.create') }}">Categories</a></li>
         <li><a href="{{ route('budget.index') }}">Budgets</a></li>
 
         {{-- @if(auth()->user()->role === 'admin')

@@ -1,36 +1,53 @@
 @extends('layout.app')
 
 @section('content')
-<h1>liste des revenues</h1>
 
-@if ($message =Session::get('success'))
-<p>
-    {{$message}}
-</p>
+<h1 class="page-title">Liste des revenus</h1>
+
+@if ($message = Session::get('success'))
+    <p class="success-message">{{ $message }}</p>
 @endif
 
-  @foreach ($incomes as $income)
-    <p>
-    <b>Date:</b> {{$income->date}} <br/>
-    <b>Description:</b>{{$income->description ? $income->description : "Non rempli"}} <br/>
+<div class="table-wrapper">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Catégorie</th>
+                <th>Montant</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-    <a href="{{ route('incomes.show' ,$income->id)}}">
-    Détails
-    </a>
+        <tbody>
+            @foreach ($incomes as $income)
+            <tr>
+                <td>{{ $income->date }}</td>
+                <td>{{ $income->description ?? 'Non rempli' }}</td>
+                <td>{{ $income->category->name ?? 'Non catégorisé' }}</td>
+                <td>{{ number_format($income->amount, 0, ',', ' ') }} FCFA</td>
 
-    <a href="{{ route('incomes.edit' ,$income->id)}}">
-    Modifier
-   </a>
-    <form action="{{route('incomes.destroy', $income->id)}}" method="post" onsubmit ="return confirm('Etes vous sur  de vouloir supprimer cette depenses ? cette action sera irréversible!')">
-    @csrf
+                <td class="actions-cell">
+                    <a href="{{ route('incomes.show', $income->id) }}" class="btn-action btn-view">Détails</a>
 
-    @method('DELETE')
-    <button type="submit">
-        Supprimer
-    </button>
-    </form>
-    </p>
+                    <a href="{{ route('incomes.edit', $income->id) }}" class="btn-action btn-edit">Modifier</a>
 
-    @endforeach
+                    <form action="{{ route('incomes.destroy', $income->id) }}" 
+                          method="post" 
+                          onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce revenu ? Cette action est irréversible !')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn-action btn-delete">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+
+    </table>
     
+</div>
+
+<button><a href="{{route('incomes.create')}}">Enregistrer une revenue</a></button>
 @endsection

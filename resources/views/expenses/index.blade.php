@@ -21,7 +21,7 @@
         <tbody>
             @foreach ($expenses as $expense)
             <tr>
-                {{-- <td>{{ $expense->date->format('d/m/Y') }}</td> --}}
+                <td>{{ $expense->date }}</td>
                 <td>{{ $expense->description ?? 'Non rempli' }}</td>
                 <td>{{ $expense->category->name ?? 'Non définie' }}</td>
                 <td>{{ number_format($expense->amount, 0, ',', ' ') }} FCFA</td>
@@ -38,5 +38,6 @@
             @endforeach
         </tbody>
     </table>
+    <button><a href="{{route('expenses.create')}}">creer une depense</a> </button>
 </div>
 @endsection

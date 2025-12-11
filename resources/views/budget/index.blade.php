@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-<h1>Budget par catégorie</h1>
+<h1 class = budget>Budget par catégorie</h1>
 
 <!-- Graphique Chart.js -->
 <div style="width: 80%; margin: 20px auto;">

@@ -31,7 +31,7 @@
 
         <button type="submit">Se connecter</button>
 
-        <a href="{{ route('admin.users.create') }}">S'inscrire</a>
+        {{-- <a href="{{ route('admin.users.create') }}">S'inscrire</a> --}}
     </form>
 </div>
 @endsection

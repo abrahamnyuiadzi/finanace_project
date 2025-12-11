@@ -1,58 +1,50 @@
 @extends('layout.app')
 
 @section('content')
-    <h1>LES DEPENSES</h1>
-    <hr>
+<div class="expense-form-container">
+    <h1>Créer une dépense</h1>
 
-
+    {{-- Erreurs --}}
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <div class="expense-alert">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-
         </div>
     @endif
 
- 
+    {{-- Boutons d’actions --}}
+    <div class="expense-buttons">
+        <a class="btn-expense" href="{{ route('expenses.create') }}">Saisir une dépense</a>
+        <a class="btn-expense" href="{{ route('expenses.index') }}">Recaptilatif des depenses</a>
+    </div>
 
-
-    <button><a href="{{ route('expenses.create') }}">saisir une depense</a></button>
-    {{-- <button><a href="{{ route('expenses.show') }}">recapitulatif des depenses</a> </button> --}}
-    <button> <a href="{{ route('categories.create') }}"> saisir une categories</a></button>
-
-
-    <form action="{{ route('expenses.store') }}" method="post">
+    <form action="{{ route('expenses.store') }}" method="post" class="expense-form">
         @csrf
 
-        <label for="date">Date : </label><br>
-        <input type="date" name="date"><br>
+        <label for="date">Date</label>
+        <input type="date" name="date" required>
 
-        <label for="amount">amount:</label><br>
-        <input type="decimal" name ="amount" ><br>
+        <label for="amount">Montant</label>
+        <input type="number" step="0.01" name="amount" required>
 
-        <label for="recipient">recipient:</label><br>
-        <input type="text" name ="recipient"  ><br>
+        <label for="recipient">Bénéficiaire</label>
+        <input type="text" name="recipient" required>
 
-        <label for="description">decription</label><br>
-        <input type="text" name="description"  ><br><br>
+        <label for="description">Description</label>
+        <input type="text" name="description">
 
-        <div class="mb-3">
-            <label for="category_id" class="form-label">Catégorie</label>
-            <select class="form-select" id="category_id" name="category_id"   required>
+        <label for="category_id">Catégorie</label>
+        <select name="category_id" id="category_id" required>
+            @foreach ($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
 
-                {{-- <option value="">Sélectionner une catégorie</option> --}}
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
+        <button type="submit" class="btn-submit-expense">Enregistrer</button>
 
-
-        <button type="submit">
-            Enregistrer
-        </button>
     </form>
+</div>
 @endsection

@@ -32,9 +32,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
-
+   
+    Route::resource('incomes', IncomeController::class);
+    Route::resource('expenses', ExpenseController::class);
+    Route::resource('categories', CategoryController::class);
     // Route::get('/admin/dashboard', function () { return view('admin.dashboard'); })->name('admin.dashboard');
-   Route::get('/admin/dashboard', [AdminAdminDashboardController::class, 'index'])
+   Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
     ->name('admin.dashboard');
     Route::get('/budget', [BudgetController::class, 'index'])->name('budget.index');
     Route::get('/budget/export/csv', [BudgetController::class, 'exportCsv'])->name('budget.export.csv');
@@ -62,9 +65,6 @@ Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
 
 
 
-    Route::resource('incomes', IncomeController::class);
-    Route::resource('expenses', ExpenseController::class);
-    Route::resource('categories', CategoryController::class);
 
      Route::post('/admin/users/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])
         ->name('admin.users.store');
@@ -83,6 +83,7 @@ Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
 
 
 Route::middleware(['auth', 'role:accountant'])->group(function () {
+
     Route::get('/accountant/dashboard', fn() => view('accountant.dashboard'))->name('accountant.dashboard');
 });
 
