@@ -27,10 +27,10 @@
     </div>
 </div>
 
-<div class="dashboard-chart">
+{{-- <div class="dashboard-chart">
     <h2>Incomes vs Expenses (Monthly)</h2>
     <canvas id="dashboardChart"></canvas>
-</div>
+</div> --}}
 
 {{-- Validation des Revenus --}}
 <div class="table-wrapper">
@@ -116,7 +116,7 @@
 
 @endsection
 
-@section('scripts')
+{{-- @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -155,5 +155,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-</script>
-@endsection
+</script> --}}
+{{-- @endsection --}}
