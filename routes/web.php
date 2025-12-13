@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminDashboardController as ControllersAdminDashboardCo
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EmployeeDashboardController;
+use App\Http\Controllers\EmployeeProfileController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\MainController;
@@ -79,10 +81,16 @@ Route::middleware(['auth', 'role:accountant'])->group(function () {
 });
 
 /************************* EMPLOYEE ****************************** */
-// Route::middleware(['auth', 'role:employee'])->group(function () {
-//   Route::get('/employee/dashboard', [AccountantDashboardController::class, 'index'])
-//     ->name('employee.dashboard');
-// });
+Route::middleware(['auth', 'role:employee'])->group(function () {
+    Route::get('/employee/dashboard', [EmployeeDashboardController::class, 'index'])
+        ->name('employee.dashboard');
+
+          Route::get('/employee/password', [EmployeeProfileController::class, 'editPassword'])
+        ->name('employee.password.edit');
+
+    Route::post('/employee/password', [EmployeeProfileController::class, 'updatePassword'])
+        ->name('employee.password.update');
+});
 
 
 
