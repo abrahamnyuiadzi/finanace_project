@@ -1391,3 +1391,13 @@ form button {
     }
 }
 
+.btnSave{
+    background-color: #0056b3;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+
+    a{
+        color: white;
+    }
+}

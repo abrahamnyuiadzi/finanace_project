@@ -38,10 +38,10 @@
 </table>
 
 <!-- Export CSV / PDF -->
-<div style="margin-top: 20px; text-align: center;">
+{{-- <div style="margin-top: 20px; text-align: center;">
     <a href="{{ route('budget.export.csv') }}" style="margin-right: 15px;">Exporter CSV</a>
     <a href="{{ route('budget.export.pdf') }}">Exporter PDF</a>
-</div>
+</div> --}}
 
 <!-- Chart.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
