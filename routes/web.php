@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Http\Controllers\AccountantDashboardController;
 use App\Http\Controllers\Admin\AdminDashboardController as AdminAdminDashboardController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminDashboardController as ControllersAdminDashboardController;
@@ -51,7 +50,18 @@ Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
     Route::get('/admin/users/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])
         ->name('admin.users.create');
 
-     
+         Route::patch('/incomes/{income}/validate', [IncomeController::class, 'validateIncome'])
+        ->name('incomes.validate');
+
+    Route::patch('/expenses/{expense}/validate', [ExpenseController::class, 'validateExpense'])
+        ->name('expenses.validate');
+
+Route::patch('/incomes/{income}/validate', [IncomeController::class, 'validateIncome'])->name('incomes.validate');
+Route::patch('/incomes/{income}/decline', [IncomeController::class, 'declineIncome'])->name('incomes.decline');
+
+Route::patch('/expenses/{expense}/validate', [ExpenseController::class, 'validateExpense'])->name('expenses.validate');
+Route::patch('/expenses/{expense}/decline', [ExpenseController::class, 'declineExpense'])->name('expenses.decline');
+
 });
 
 
@@ -69,9 +79,10 @@ Route::middleware(['auth', 'role:accountant'])->group(function () {
 });
 
 /************************* EMPLOYEE ****************************** */
-Route::middleware(['auth', 'role:employee'])->group(function () {
-    Route::get('/employee/profile', fn() => view('employee.dashboard'))->name('employee.dashboard');
-});
+// Route::middleware(['auth', 'role:employee'])->group(function () {
+//   Route::get('/employee/dashboard', [AccountantDashboardController::class, 'index'])
+//     ->name('employee.dashboard');
+// });
 
 
 

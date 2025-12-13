@@ -39,6 +39,7 @@ class IncomeController extends Controller
             'description' => $request->description,
             'amount' => $request->amount,
             'date' => $request->date,
+            'status' => 'pending', // 🔥 IMPORTANT
        
         ]);
         
@@ -94,4 +95,28 @@ class IncomeController extends Controller
 
         return redirect()->route('incomes.index')->with('success', 'Revenu supprimé avec succès.');
     }
+
+    
+
+
+
+
+public function validateIncome(Income $income)
+{
+    $income->update(['status' => 'validated']);
+    return redirect()->back()->with('success', 'Revenu validé avec succès.');
+}
+
+public function declineIncome(Income $income)
+{
+    $income->update(['status' => 'declined']);
+    return redirect()->back()->with('success', 'Revenu refusé.');
+}
+
+
+
+
+
+
+
 }

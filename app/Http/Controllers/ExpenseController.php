@@ -10,11 +10,14 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        $expenses = Expense::orderBy('date', 'desc')->paginate(15);
 
-        $total = Expense::sum('amount');
+        $expenses = Expense::where('status', 'validated')
+        ->orderBy('date', 'desc')
+        ->paginate(15);
 
-        return view('expenses.index', compact('expenses', 'total'));
+    $total = Expense::where('status', 'validated')->sum('amount');
+
+    return view('expenses.index', compact('expenses', 'total'));
     }
 
     public function create()
@@ -107,4 +110,19 @@ class ExpenseController extends Controller
 
         return redirect()->route('expenses.index')->with('success', 'Dépense supprimée avec succès.');
     }
+
+
+public function validateExpense(Expense $expense)
+{
+    $expense->update(['status' => 'validated']);
+    return redirect()->back()->with('success', 'Dépense validée avec succès.');
+}
+
+public function declineExpense(Expense $expense)
+{
+    $expense->update(['status' => 'declined']);
+    return redirect()->back()->with('success', 'Dépense refusée.');
+}
+
+
 }

@@ -13,11 +13,17 @@ use HasFactory;
         'category_id', 
         'amount', 
         'description', 
-        'date'
+        'date',
+        'is_validated',
+          'status', 
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
+
+        protected $casts = [
+        'date' => 'datetime',
+    ];
 }
