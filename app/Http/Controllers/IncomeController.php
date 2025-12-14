@@ -10,10 +10,18 @@ class IncomeController extends Controller
 {
     public function index()
     {
-        $incomes = Income::orderBy('date', 'desc')->paginate(15);
-        $total = Income::sum('amount');
+        // $incomes = Income::orderBy('date', 'desc')->paginate(15);
+        // $total = Income::sum('amount');
 
-        return view('incomes.index', compact('incomes', 'total'));
+        // return view('incomes.index', compact('incomes', 'total'));
+
+          $incomes = Income::where('status', 'validated')
+        ->orderBy('date', 'desc')
+        ->paginate(15);
+
+    $total = Income::where('status', 'validated')->sum('amount');
+
+    return view('incomes.index', compact('incomes', 'total'));
     }
 
     public function create()

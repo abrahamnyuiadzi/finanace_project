@@ -15,7 +15,7 @@ use HasFactory;
         'description', 
         'date',
         'is_validated',
-          'status', 
+        'status', 
     ];
 
     public function category()
