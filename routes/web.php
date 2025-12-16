@@ -77,7 +77,12 @@ Route::patch('/expenses/{expense}/decline', [ExpenseController::class, 'declineE
 Route::middleware(['auth', 'role:accountant'])->group(function () {
   Route::get('/accountant/dashboard', [AccountantDashboardController::class, 'index'])
     ->name('accountant.dashboard');
-    
+  
+    Route::get('/accountant/password', [AccountantDashboardController::class, 'editPassword'])
+        ->name('accountant.password.edit');
+
+    Route::post('/accountant/password', [AccountantDashboardController::class, 'updatePassword'])
+        ->name('accountant.password.update');
 });
 
 /************************* EMPLOYEE ****************************** */

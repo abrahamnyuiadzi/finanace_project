@@ -10,18 +10,15 @@ class IncomeController extends Controller
 {
     public function index()
     {
-        // $incomes = Income::orderBy('date', 'desc')->paginate(15);
-        // $total = Income::sum('amount');
-
-        // return view('incomes.index', compact('incomes', 'total'));
-
-          $incomes = Income::where('status', 'validated')
+        $incomes = Income::where('status', 'validated')
         ->orderBy('date', 'desc')
         ->paginate(15);
 
     $total = Income::where('status', 'validated')->sum('amount');
 
-    return view('incomes.index', compact('incomes', 'total'));
+    return view('incomes.index', compact('incomes', 'total'));   
+
+     
     }
 
     public function create()
@@ -117,8 +114,10 @@ public function validateIncome(Income $income)
 
 public function declineIncome(Income $income)
 {
-    $income->update(['status' => 'declined']);
-    return redirect()->back()->with('success', 'Revenu refusé.');
+    // $income->update(['status' => 'declined']);
+    // return redirect()->back()->with('success', 'Revenu refusé.');
+       $income->delete(); // supprime définitivement
+    return redirect()->back()->with('success', 'Revenu refusé et supprimé.');
 }
 
 

@@ -120,8 +120,10 @@ public function validateExpense(Expense $expense)
 
 public function declineExpense(Expense $expense)
 {
-    $expense->update(['status' => 'declined']);
-    return redirect()->back()->with('success', 'Dépense refusée.');
+    // $expense->update(['status' => 'declined']);
+    // return redirect()->back()->with('success', 'Dépense refusée.');
+    $expense->delete(); // supprime définitivement
+    return redirect()->back()->with('success', 'Dépense refusée et supprimée.');
 }
 
 
