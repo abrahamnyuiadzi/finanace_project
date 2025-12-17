@@ -16,6 +16,10 @@ use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[MainController::class ,'welcome'])->name('welcome');
+
+Route::middleware(['auth'])->get('/dashboard', [MainController::class, 'dashboard'])
+    ->name('dashboard');
+
  Route::get('/dashboard',[MainController::class ,'dashboard'])->name('dashboard');
 
 
