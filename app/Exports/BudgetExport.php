@@ -1,31 +1,50 @@
 <?php
 
-namespace App\Exports;
+namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Http\Request;
 
-class BudgetExport implements FromCollection, WithHeadings
+class BudgetController extends Controller
 {
-    public function collection()
+    public function index(Request $request)
     {
-        return Category::all()->map(function ($category) {
-            $totalExpenses = $category->expenses()->sum('amount');
-            $totalIncomes  = $category->incomes()->sum('amount');
-            $balance       = $totalIncomes - $totalExpenses;
+        // Toutes les catégories (pour le filtre)
+        $allCategories = Category::orderBy('name')->get();
+
+        // Catégorie sélectionnée
+        $selectedCategoryId = $request->get('category');
+
+        // Filtrage
+        $categoriesQuery = Category::query();
+
+        if ($selectedCategoryId) {
+            $categoriesQuery->where('id', $selectedCategoryId);
+        }
+
+        $categories = $categoriesQuery->get()->map(function ($category) {
+            $expenses = $category->expenses()->sum('amount');
+            $incomes  = $category->incomes()->sum('amount');
 
             return [
-                'Category' => $category->name,
-                'Expenses' => $totalExpenses,
-                'Incomes'  => $totalIncomes,
-                'Balance'  => $balance
+                'name'     => $category->name,
+                'expenses' => $expenses,
+                'incomes'  => $incomes,
+                'balance'  => $incomes - $expenses,
             ];
         });
-    }
 
-    public function headings(): array
-    {
-        return ['Category', 'Expenses', 'Incomes', 'Balance'];
+        // Totaux globaux
+        $total_expenses = $categories->sum('expenses');
+        $total_incomes  = $categories->sum('incomes');
+        $total_balance  = $total_incomes - $total_expenses;
+
+        return view('budget.index', compact(
+            'categories',
+            'allCategories',
+            'total_expenses',
+            'total_incomes',
+            'total_balance'
+        ));
     }
 }
