@@ -38,6 +38,6 @@
             @endforeach
         </tbody>
     </table>
-    <button class ="btnSave"><a href="{{route('expenses.create')}}">creer une depense</a> </button>
+    <button class ="btnSave"><a href="{{route('expenses.create')}}">Enregistrer une depense</a> </button>
 </div>
 @endsection
