@@ -26,7 +26,7 @@
 </div>
 
 <div class="dashboard-info" style="margin-top: 30px;">
-    <p>
+    <p style ="text-align: center">
         Les montants affichés correspondent uniquement aux
         <strong>revenus et dépenses validés par l’administrateur</strong>.
     </p>

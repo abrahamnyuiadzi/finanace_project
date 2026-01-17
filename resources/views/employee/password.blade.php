@@ -45,9 +45,9 @@
                 Mettre à jour
             </button>
 
-            <a href="{{ route('employee.dashboard') }}" class="btn-action btn-secondary">
+            {{-- <a href="{{ route('employee.dashboard') }}" class="btn-action btn-secondary">
                 Annuler
-            </a>
+            </a> --}}
         </div>
     </form>
 
