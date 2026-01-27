@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="expenses-container">
-    <h1>Liste des dépenses</h1>
+    <h1>Liste des categories</h1>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">{{ $message }}</div>
