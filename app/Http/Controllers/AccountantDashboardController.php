@@ -63,3 +63,4 @@ class AccountantDashboardController extends Controller
             ->with('success', 'Mot de passe modifié avec succès.');
     }
 }
+

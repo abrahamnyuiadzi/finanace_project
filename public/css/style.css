@@ -414,6 +414,7 @@ body {
     .btn-back {
         display: inline-block;
         margin-top: 25px;
+        margin-left: 200px;
         padding: 10px 18px;
         background: #007bff;
         color: white !important;
@@ -1394,6 +1395,7 @@ form button {
 .btnSave{
     background-color: #0056b3;
     padding: 12px;
+    margin-left: 20px;
     border-radius: 10px;
     border: none;
 

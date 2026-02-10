@@ -33,6 +33,6 @@
 
 </div>
 
-<a href="{{ route('expenses.index') }}" class="btn-back">← Retour aux dépenses</a>
+<a href="{{ route('expenses.index') }}" class="btn-back"> Retour aux dépenses</a>
 
 @endsection

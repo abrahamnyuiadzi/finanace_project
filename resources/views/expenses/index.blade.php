@@ -37,7 +37,8 @@
             </tr>
             @endforeach
         </tbody>
-    </table>
+    </table><br>
+    <br>
     <button class ="btnSave"><a href="{{route('expenses.create')}}">Enregistrer une depense</a> </button>
 </div>
 @endsection

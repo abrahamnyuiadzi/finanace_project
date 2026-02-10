@@ -48,6 +48,6 @@
     </table>
     
 </div>
-
+<br><br>
 <button class ="btnSave"><a href="{{route('incomes.create')}}">Enregistrer une revenue</a></button>
 @endsection
