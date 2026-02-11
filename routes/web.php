@@ -56,7 +56,7 @@ Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
     Route::get('/admin/users/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])
         ->name('admin.users.create');
 
-         Route::patch('/incomes/{income}/validate', [IncomeController::class, 'validateIncome'])
+    Route::patch('/incomes/{income}/validate', [IncomeController::class, 'validateIncome'])
         ->name('incomes.validate');
 
     Route::patch('/expenses/{expense}/validate', [ExpenseController::class, 'validateExpense'])

@@ -49,7 +49,7 @@
         </select>
     </div>
 
-    <button type="submit" class="btn-primary">Modifier le revenu</button>
+    <button type="submit" class="btn-primary">Modifier le revenu</button><br><br>
     <a href="{{ route('incomes.index') }}" class="btn-secondary">Retour</a>
 </form>
 
